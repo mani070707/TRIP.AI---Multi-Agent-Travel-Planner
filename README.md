@@ -1,5 +1,7 @@
 # TRIP AI - Multi-Agent Travel Planner
 
+Deployed Link : https://trip-ai-multi-agent-travel-planner.onrender.com/
+
 TRIP AI is a production-style travel planning app built with FastAPI, LangGraph,
 Groq-hosted LLM calls, MCP tools, PostgreSQL checkpoints, input guardrails, and
 a human-in-the-loop review step.
