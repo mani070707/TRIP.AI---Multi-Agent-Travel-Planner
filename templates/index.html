@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111613">
+  <meta name="description" content="Thoughtful travel plans, made for you. Plan, review, and refine your next journey with TRIP AI.">
+  <title>TRIP AI — A little further from ordinary</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23b5cba5'/%3E%3Cpath d='M10 28 20 9l10 19-10-5Z' fill='%23111613'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+  <script defer src="{{ url_for('static', path='/script.js') }}"></script>
+</head>
+<body>
+  <a class="skip-link" href="#trip-message">Skip to trip planner</a>
+  <header class="header shell">
+    <a class="brand" href="/" aria-label="TRIP AI home"><span class="brand-icon" aria-hidden="true">↗</span>TRIP<span class="brand-ai">AI</span></a>
+    <span class="header-note">LESS PLANNING. MORE POSSIBILITY.</span>
+    <button id="new-trip" class="button button-quiet" type="button"><span aria-hidden="true">＋</span> New trip</button>
+  </header>
+  <div class="system-bar shell" aria-label="System capabilities">
+    <span class="system-live"><span class="status-dot"></span> PRODUCTION AGENT SYSTEM</span>
+    <span>Multi-agent orchestration</span><span>MCP tools</span><span>Input guardrails</span><span>Human-in-the-loop review</span>
+  </div>
+  <main class="shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> YOUR PERSONAL TRAVEL COMPANION</p>
+        <h1 id="hero-title">Your next journey,<br><em>thoughtfully planned.</em></h1>
+        <p class="intro">The places you’ve dreamed of. The details taken care of.<br class="desktop-break"> A journey that feels a little more like you.</p>
+        <div class="hero-footnote"><span class="line"></span> A LITTLE FURTHER FROM ORDINARY</div>
+      </div>
+      <div class="journey-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <span class="compass-n">N</span><span class="compass-s">S</span>
+        <div class="landscape"><div class="sun"></div><div class="mountain mountain-back"></div><div class="mountain mountain-front"></div><div class="mountain mountain-near"></div><div class="landscape-grain"></div></div>
+        <svg class="route" viewBox="0 0 360 320"><path d="M45 247C35 133 304 260 288 78"/><circle cx="45" cy="247" r="5"/><circle cx="288" cy="78" r="5"/></svg>
+        <div class="art-label"><span>↗</span> Find your somewhere.</div>
+        <span class="art-coordinate">ENDLESS POSSIBILITIES</span>
+      </div>
+    </section>
+
+    <section class="planner panel" aria-labelledby="planner-title">
+      <div class="section-heading"><div><p class="eyebrow">01 / THE BEGINNING</p><h2 id="planner-title">Where are we heading?</h2></div><span class="small-note">Big adventures start with a little idea.</span></div>
+      <form id="trip-form">
+        <label class="sr-only" for="trip-message">Describe your trip</label>
+        <textarea id="trip-message" name="message" rows="3" required placeholder="A week in Japan this autumn, starting from Delhi. Think quiet cafés, mountain walks, and a little city wandering…" aria-describedby="input-hint"></textarea>
+        <div class="composer-footer"><p id="input-hint"><span aria-hidden="true">✧</span> Add your dates, departure city, budget, and what you love.</p><button class="button button-primary" id="plan-button" type="submit">Plan my trip <span aria-hidden="true">↗</span></button></div>
+      </form>
+      <div class="inspiration"><span>Need a little inspiration?</span><button class="suggestion" type="button" data-prompt="Plan a 5-day slow escape to Bali from Bengaluru for two adults in November, with a total budget of ₹100,000. Include nature, quiet cafés, and relaxed beach days.">A slow escape to Bali <span aria-hidden="true">↗</span></button><button class="suggestion" type="button" data-prompt="Plan a 7-day food and culture trip to Japan from Delhi for one adult in October, with a total budget of ₹180,000. Include Tokyo, Kyoto, and local food experiences.">A taste of Japan <span aria-hidden="true">↗</span></button><button class="suggestion" type="button" data-prompt="Plan a 4-day mountain getaway to Himachal Pradesh from Delhi for two adults in April, with a total budget of ₹40,000. Include scenic walks and cozy stays.">Into the mountains <span aria-hidden="true">↗</span></button></div>
+    </section>
+
+    <div id="loading" class="loading panel" role="status" hidden><span class="spinner" aria-hidden="true"></span><div><strong id="loading-title">Putting your journey together</strong><p>Good plans take a moment. We’re gathering the details.</p></div></div>
+    <div id="error" class="error" role="alert" hidden></div>
+
+    <section id="results" class="results panel" aria-labelledby="result-title" hidden>
+      <div class="section-heading"><div><p class="eyebrow" id="result-stage">02 / YOUR JOURNEY</p><h2 id="result-title" tabindex="-1">Your itinerary</h2></div><span class="badge" id="result-badge">Ready to review</span></div>
+      <section id="agent-system" class="agent-system" aria-labelledby="agent-system-title">
+        <div class="agent-system-heading">
+          <div><p class="eyebrow">SUPERVISOR AGENT</p><h3 id="agent-system-title">How your plan was assembled</h3></div>
+          <span class="execution-status"><span class="status-dot"></span> Run complete</span>
+        </div>
+        <div id="agent-flow" class="agent-flow" aria-label="Agent execution order"></div>
+        <p id="supervisor-reasoning" class="supervisor-reasoning"></p>
+      </section>
+      <div id="answer" class="prose"></div>
+      <div id="review" class="review" hidden>
+        <p id="approval-copy"></p>
+        <div class="review-actions"><button id="approve" class="button button-primary" type="button">Approve itinerary <span aria-hidden="true">✓</span></button><button id="request-changes" class="button button-secondary" type="button" aria-expanded="false" aria-controls="feedback-form">Request changes</button></div>
+        <form id="feedback-form" hidden><label for="feedback">What would make this trip more you?</label><textarea id="feedback" rows="3" required placeholder="More time in Kyoto, a quieter hotel, or a little room in the budget…"></textarea><button id="revise" class="button button-primary" type="submit">Send changes <span aria-hidden="true">↗</span></button></form>
+      </div>
+    </section>
+
+    <section class="features" aria-label="How your trip comes together"><article><span class="feature-icon" aria-hidden="true">⌁</span><div><h3>Made around you</h3><p>Your pace, your interests, your kind of trip.</p></div></article><article><span class="feature-icon" aria-hidden="true">◇</span><div><h3>The details, connected</h3><p>Stays, flights, weather, and budget in one place.</p></div></article><article><span class="feature-icon" aria-hidden="true">↗</span><div><h3>A plan you can shape</h3><p>Review it. Refine it. Make it yours.</p></div></article></section>
+  </main>
+  <footer class="footer shell"><span>TRIP AI <span class="footer-separator">/</span> Thoughtfully planned. Freely explored.</span><span>Built for the curious.</span></footer>
+</body>
+</html>
